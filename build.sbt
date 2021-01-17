@@ -127,7 +127,7 @@ lazy val `embedded-files-macro` =
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "embedded-files"
+    name := "embedded-files-macro"
   )
   .settings(noPublish)
   .aggregate(
