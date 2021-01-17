@@ -10,9 +10,6 @@ private[embedded] object FileNameToClassName {
       sourceFileName: String,
       rootPackage: String
   ): Either[String, Seq[String]] = {
-    println(s"fileName: $fileName")
-    println(s"sourceFileName: $sourceFileName")
-
     val filePath =
       fileName.trim.split("/").filterNot(_.isEmpty).map(toValidTerm)
     if (filePath.isEmpty) {

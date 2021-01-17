@@ -1,7 +1,7 @@
 ThisBuild / organization := "com.yurique"
-ThisBuild / homepage := Some(url("https://github.com/yurique/embedded-files"))
+ThisBuild / homepage := Some(url("https://github.com/yurique/embedded-files-macro"))
 ThisBuild / licenses += ("MIT", url(
-  "https://github.com/yurique/embedded-files/blob/main/LICENSE.md"
+  "https://github.com/yurique/embedded-files-macro/blob/main/LICENSE.md"
 ))
 ThisBuild / developers := List(
   Developer(
@@ -13,8 +13,8 @@ ThisBuild / developers := List(
 )
 ThisBuild / scmInfo := Some(
   ScmInfo(
-    url("https://github.com/yurique/embedded-files"),
-    "scm:git@github.com/yurique/embedded-files.git"
+    url("https://github.com/yurique/embedded-files-macro"),
+    "scm:git@github.com/yurique/embedded-files-macro.git"
   )
 )
 ThisBuild / publishTo := sonatypePublishToBundle.value
@@ -23,6 +23,7 @@ ThisBuild / sonatypeProfileName := "yurique"
 ThisBuild / publishArtifact in Test := false
 ThisBuild / publishMavenStyle := true
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
 val scala212Version  = "2.12.12"
 val scala213Version  = "2.13.4"
 val scala3M3Version  = "3.0.0-M3"
@@ -57,6 +58,7 @@ lazy val addScalaReflect = Seq(
 )
 
 lazy val addJUnit = Seq(
+  testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v"),
   libraryDependencies ++= Seq(
     "junit"         % "junit"           % "4.11" % Test,
     ("com.novocode" % "junit-interface" % "0.11" % Test)
