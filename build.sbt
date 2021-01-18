@@ -1,13 +1,3 @@
-ThisBuild / organization := "com.yurique"
-ThisBuild / homepage := Some(url("https://github.com/yurique/embedded-files-macro"))
-ThisBuild / licenses += "MIT" -> url("https://github.com/yurique/embedded-files-macro/blob/main/LICENSE.md")
-ThisBuild / developers += Developer("yurique", "Iurii Malchenko", "i@yurique.com", url("https://github.com/yurique"))
-ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/yurique/embedded-files-macro"), "scm:git@github.com/yurique/embedded-files-macro.git"))
-ThisBuild / publishTo := sonatypePublishToBundle.value
-ThisBuild / sonatypeProfileName := "yurique"
-ThisBuild / publishArtifact in Test := false
-ThisBuild / githubWorkflowPublishTargetBranches := Seq()
-
 ThisBuild / scalaVersion := ScalaVersions.v3M3
 ThisBuild / crossScalaVersions := Seq(ScalaVersions.v3RC1, ScalaVersions.v3M3, ScalaVersions.v213, ScalaVersions.v212)
 
@@ -24,6 +14,7 @@ lazy val `embedded-files-macro` =
           case Some((3, _)) => Seq()
           case _            => Seq()
         }),
+      scalacOptions in (Compile, doc) ~= (_.filter(_.startsWith("-Xplugin"))),
       libraryDependencies ++=
         (CrossVersion.partialVersion(scalaVersion.value) match {
           case Some((2, _)) => Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value)
