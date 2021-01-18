@@ -14,7 +14,22 @@ lazy val `embedded-files-macro` =
           case Some((3, _)) => Seq()
           case _            => Seq()
         }),
-      scalacOptions in (Compile, doc) ~= (_.filter(_.startsWith("-Xplugin"))),
+      scalacOptions in (Compile, doc) ~= (_.filterNot(
+        Set(
+          "-scalajs",
+          "-deprecation",
+          "-explain-types",
+          "-explain",
+          "-feature",
+          "-language:existentials,experimental.macros,higherKinds,implicitConversions",
+          "-unchecked",
+          "-Xfatal-warnings",
+          "-Ykind-projector",
+          "-from-tasty",
+          "-encoding",
+          "utf8",
+        )
+      )),
       libraryDependencies ++=
         (CrossVersion.partialVersion(scalaVersion.value) match {
           case Some((2, _)) => Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value)
