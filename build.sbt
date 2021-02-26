@@ -1,5 +1,9 @@
-ThisBuild / scalaVersion := ScalaVersions.v3M3
-ThisBuild / crossScalaVersions := Seq(ScalaVersions.v3RC1, ScalaVersions.v3M3, ScalaVersions.v213, ScalaVersions.v212)
+ThisBuild / scalaVersion := ScalaVersions.v3RC1
+ThisBuild / crossScalaVersions := Seq(
+  ScalaVersions.v3RC1, 
+  ScalaVersions.v213, 
+  ScalaVersions.v212
+)
 
 lazy val `embedded-files-macro` =
   crossProject(JVMPlatform, JSPlatform)
