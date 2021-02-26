@@ -1,8 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+Scala 3 RC1 support.
+
 ## 0.2.0
 
-Extracted the macro into a separate repository. Scala 3 (M3 and RC1) support.
+Extracted the macro into a separate repository. Scala 3 M3 support.
 
 ## 0.1.1
 
