@@ -40,7 +40,7 @@ lazy val `embedded-files-macro` =
           case _            => Seq()
         }),
       libraryDependencies ++= Seq(
-        "junit"         % "junit"           % "4.11" % Test,
+        "junit"         % "junit"           % "4.13.2" % Test,
         ("com.novocode" % "junit-interface" % "0.11" % Test)
           .exclude("junit", "junit-dep")
       ),
