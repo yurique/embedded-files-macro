@@ -33,6 +33,8 @@ class ConetentRefImpl(val c: blackbox.Context) {
               )
             )
       }
+    case _ =>
+      c.abort(c.enclosingPosition, "not a string literal")
   }
 
 }

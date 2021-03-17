@@ -1,8 +1,25 @@
-ThisBuild / scalaVersion := ScalaVersions.v3RC1
-ThisBuild / crossScalaVersions := Seq(
-  ScalaVersions.v3RC1, 
-  ScalaVersions.v213, 
-  ScalaVersions.v212
+inThisBuild(
+  List(
+    organization := "com.yurique",
+    homepage := Some(url("https://github.com/yurique/embedded-files-macro")),
+    licenses := List("MIT" -> url("https://github.com/yurique/embedded-files-macro/blob/main/LICENSE.md")),
+    developers := List(Developer("yurique", "Iurii Malchenko", "i@yurique.com", url("https://github.com/yurique"))),
+    scmInfo := Some(ScmInfo(url("https://github.com/yurique/embedded-files-macro"), "scm:git@github.com/yurique/embedded-files-macro.git")),
+    Test / publishArtifact := false,
+    versionScheme := Some("early-semver"),
+    scalaVersion := ScalaVersions.v213,
+    crossScalaVersions := Seq(
+      ScalaVersions.v3RC1,
+      ScalaVersions.v213,
+      ScalaVersions.v212
+    ),
+    versionPolicyIntention := Compatibility.BinaryCompatible,
+    //  https://github.com/scalacenter/sbt-version-policy/issues/62
+    //    githubWorkflowBuild += WorkflowStep.Sbt(List("versionPolicyCheck")),
+    githubWorkflowTargetTags ++= Seq("v*"),
+    githubWorkflowPublishTargetBranches += RefPredicate.StartsWith(Ref.Tag("v")),
+    githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release")))
+  )
 )
 
 lazy val `embedded-files-macro` =
@@ -18,7 +35,7 @@ lazy val `embedded-files-macro` =
           case Some((3, _)) => Seq()
           case _            => Seq()
         }),
-      scalacOptions in (Compile, doc) ~= (_.filterNot(
+      (Compile / doc / scalacOptions) ~= (_.filterNot(
         Set(
           "-scalajs",
           "-deprecation",
@@ -31,7 +48,7 @@ lazy val `embedded-files-macro` =
           "-Ykind-projector",
           "-from-tasty",
           "-encoding",
-          "utf8",
+          "utf8"
         )
       )),
       libraryDependencies ++=
@@ -41,7 +58,7 @@ lazy val `embedded-files-macro` =
         }),
       libraryDependencies ++= Seq(
         "junit"         % "junit"           % "4.13.2" % Test,
-        ("com.novocode" % "junit-interface" % "0.11" % Test)
+        ("com.novocode" % "junit-interface" % "0.11"   % Test)
           .exclude("junit", "junit-dep")
       ),
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
