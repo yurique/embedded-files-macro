@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+Scala 3 RC2 support.
+
 ## 0.2.1
 
 Scala 3 RC1 support.
