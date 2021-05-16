@@ -9,7 +9,7 @@ inThisBuild(
     versionScheme := Some("early-semver"),
     scalaVersion := ScalaVersions.v213,
     crossScalaVersions := Seq(
-      ScalaVersions.v3RC3,
+      ScalaVersions.v3,
       ScalaVersions.v213,
       ScalaVersions.v212
     ),
@@ -72,16 +72,12 @@ lazy val `embedded-files-macro` =
 
 // TODO figure out a better way of doing this
 lazy val addSharedScalaSourceDir = Seq(
-  Compile / unmanagedSourceDirectories ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, _)) => Seq(baseDirectory.value / "../src/main/scala-2")
-    case Some((3, _)) => Seq(baseDirectory.value / "../src/main/scala-3")
-    case _            => Seq()
-  }),
-  Test / unmanagedSourceDirectories ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, _)) => Seq(baseDirectory.value / "../src/test/scala-2")
-    case Some((3, _)) => Seq(baseDirectory.value / "../src/test/scala-3")
-    case _            => Seq()
-  })
+  Compile / unmanagedSourceDirectories ++= CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
+    baseDirectory.value / "../src/main/scala-2"
+  },
+  Test / unmanagedSourceDirectories ++= CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
+    baseDirectory.value / "../src/test/scala-2"
+  }
 )
 
 lazy val noPublish = Seq(
