@@ -35,33 +35,11 @@ lazy val `embedded-files-macro` =
     .jsConfigure(_.enablePlugins(ScalaJSJUnitPlugin))
     .settings(addSharedScalaSourceDir)
     .settings(
-      scalacOptions ++=
-        (CrossVersion.partialVersion(scalaVersion.value) match {
-          case Some((2, _)) => Seq("-language:experimental.macros")
-          case Some((3, _)) => Seq()
-          case _            => Seq()
-        }),
-      (Compile / doc / scalacOptions) ~= (_.filterNot(
-        Set(
-          "-scalajs",
-          "-deprecation",
-          "-explain-types",
-          "-explain",
-          "-feature",
-          "-language:existentials,experimental.macros,higherKinds,implicitConversions",
-          "-unchecked",
-          "-Xfatal-warnings",
-          "-Ykind-projector",
-          "-from-tasty",
-          "-encoding",
-          "utf8"
-        )
-      )),
+      ScalaOptions.fixOptions,
       libraryDependencies ++=
-        (CrossVersion.partialVersion(scalaVersion.value) match {
-          case Some((2, _)) => Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value)
-          case _            => Seq()
-        }),
+        CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
+          "org.scala-lang" % "scala-reflect" % scalaVersion.value
+        },
       libraryDependencies ++= Seq(
         "junit"         % "junit"           % "4.13.2" % Test,
         ("com.novocode" % "junit-interface" % "0.11"   % Test)
