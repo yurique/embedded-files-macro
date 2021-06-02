@@ -14,8 +14,7 @@ inThisBuild(
       ScalaVersions.v212
     ),
     versionPolicyIntention := Compatibility.BinaryCompatible,
-    //  https://github.com/scalacenter/sbt-version-policy/issues/62
-    //    githubWorkflowBuild += WorkflowStep.Sbt(List("versionPolicyCheck")),
+    githubWorkflowBuild += WorkflowStep.Sbt(List("versionPolicyCheck")),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release"))),
@@ -35,7 +34,6 @@ lazy val `embedded-files-macro` =
     .jsConfigure(_.enablePlugins(ScalaJSJUnitPlugin))
     .settings(addSharedScalaSourceDir)
     .settings(
-      ScalaOptions.fixOptions,
       libraryDependencies ++=
         CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
           "org.scala-lang" % "scala-reflect" % scalaVersion.value
