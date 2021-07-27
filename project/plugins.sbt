@@ -16,4 +16,4 @@ addSbtPlugin("com.codecommit" % "sbt-github-actions" % "0.12.0")
 
 addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.5.7")
 
-addSbtPlugin("ch.epfl.scala" % "sbt-version-policy" % "1.2.0")
+addSbtPlugin("ch.epfl.scala" % "sbt-version-policy" % "1.2.1")
