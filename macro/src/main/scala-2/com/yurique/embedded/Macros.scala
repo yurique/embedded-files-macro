@@ -9,13 +9,13 @@ object EmbeddedFilesConfig {
 object FileAsString {
 
   def apply(fileName: String): String =
-    macro ConetentRefImpl.referEmbeddedFile
+    macro ContentRefImpl.referEmbeddedFile
 
 }
 
 object FileAsByteArray {
 
   def apply(fileName: String): Array[Byte] =
-    macro ConetentRefImpl.referEmbeddedFile
+    macro ContentRefImpl.referEmbeddedFile
 
 }

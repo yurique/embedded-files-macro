@@ -32,7 +32,6 @@ lazy val `embedded-files-macro` =
     .crossType(CrossType.Pure)
     .in(file("macro"))
     .jsConfigure(_.enablePlugins(ScalaJSJUnitPlugin))
-    .settings(addSharedScalaSourceDir)
     .settings(
       libraryDependencies ++=
         CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
@@ -45,16 +44,6 @@ lazy val `embedded-files-macro` =
       ),
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
     )
-
-// TODO figure out a better way of doing this
-lazy val addSharedScalaSourceDir = Seq(
-  Compile / unmanagedSourceDirectories ++= CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
-    baseDirectory.value / "../src/main/scala-2"
-  },
-  Test / unmanagedSourceDirectories ++= CrossVersion.partialVersion(scalaVersion.value).collect { case (2, _) =>
-    baseDirectory.value / "../src/test/scala-2"
-  }
-)
 
 lazy val noPublish = Seq(
   publishLocal / skip := true,

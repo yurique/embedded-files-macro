@@ -3,7 +3,7 @@ package com.yurique.embedded
 import internal.FileNameToClassName
 import scala.reflect.macros.blackbox
 
-class ConetentRefImpl(val c: blackbox.Context) {
+class ContentRefImpl(val c: blackbox.Context) {
   import c._
   import universe._
 
