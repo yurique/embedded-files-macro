@@ -14,7 +14,7 @@ class ContentRefImpl(val c: blackbox.Context) {
         c.enclosingPosition.source.path,
         EmbeddedFilesConfig.rootPackage
       ) match {
-        case Left(error) =>
+        case Left(error)      =>
           c.abort(c.enclosingPosition, error)
         case Right(classPath) =>
           (classPath ++ Seq("content"))
@@ -33,7 +33,7 @@ class ContentRefImpl(val c: blackbox.Context) {
               )
             )
       }
-    case _ =>
+    case _                                   =>
       c.abort(c.enclosingPosition, "not a string literal")
   }
 

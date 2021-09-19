@@ -15,13 +15,13 @@ private[embedded] object FileNameToClassName {
     if (filePath.isEmpty) {
       Left(s"invalid file name: ${fileName}")
     } else {
-      val className = filePath.last
+      val className   = filePath.last
       val packagePath =
         if (fileName.startsWith("/")) {
           filePath.dropRight(1)
         } else {
-          val sourcePath       = sourceFileName.replace("\\", "/").split("/")
-          val sourceParentPath = sourcePath.dropRight(1)
+          val sourcePath         = sourceFileName.replace("\\", "/").split("/")
+          val sourceParentPath   = sourcePath.dropRight(1)
           val sourceRelativePath = sourceParentPath
             .dropWhile(!_.startsWith("scala"))
             .drop(1)
