@@ -1,19 +1,19 @@
 inThisBuild(
   List(
-    organization           := "com.yurique",
-    homepage               := Some(url("https://github.com/yurique/embedded-files-macro")),
-    licenses               := List("MIT" -> url("https://github.com/yurique/embedded-files-macro/blob/main/LICENSE.md")),
-    developers             := List(Developer("yurique", "Iurii Malchenko", "i@yurique.com", url("https://github.com/yurique"))),
-    scmInfo                := Some(ScmInfo(url("https://github.com/yurique/embedded-files-macro"), "scm:git@github.com/yurique/embedded-files-macro.git")),
-    Test / publishArtifact := false,
-    versionScheme          := Some("early-semver"),
-    scalaVersion           := ScalaVersions.v213,
-    crossScalaVersions := Seq(
+    organization                        := "com.yurique",
+    homepage                            := Some(url("https://github.com/yurique/embedded-files-macro")),
+    licenses                            := List("MIT" -> url("https://github.com/yurique/embedded-files-macro/blob/main/LICENSE.md")),
+    developers                          := List(Developer("yurique", "Iurii Malchenko", "i@yurique.com", url("https://github.com/yurique"))),
+    scmInfo                             := Some(ScmInfo(url("https://github.com/yurique/embedded-files-macro"), "scm:git@github.com/yurique/embedded-files-macro.git")),
+    Test / publishArtifact              := false,
+    versionScheme                       := Some("early-semver"),
+    scalaVersion                        := ScalaVersions.v213,
+    crossScalaVersions                  := Seq(
       ScalaVersions.v3,
       ScalaVersions.v213,
       ScalaVersions.v212
     ),
-    versionPolicyIntention := Compatibility.BinaryCompatible,
+    versionPolicyIntention              := Compatibility.BinaryCompatible,
     githubWorkflowBuild += WorkflowStep.Sbt(List("versionPolicyCheck")),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
@@ -45,13 +45,13 @@ lazy val `embedded-files-macro` =
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
     )
 
-lazy val noPublish = Seq(
+lazy val noPublish              = Seq(
   publishLocal / skip := true,
   publish / skip      := true,
   publishTo           := Some(Resolver.file("Unused transient repository", file("target/unusedrepo")))
 )
 
-lazy val root = project
+lazy val root                   = project
   .in(file("."))
   .settings(
     name := "embedded-files-macro"
