@@ -45,13 +45,13 @@ lazy val `embedded-files-macro` =
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
     )
 
-lazy val noPublish              = Seq(
+lazy val noPublish = Seq(
   publishLocal / skip := true,
   publish / skip      := true,
   publishTo           := Some(Resolver.file("Unused transient repository", file("target/unusedrepo")))
 )
 
-lazy val root                   = project
+lazy val root = project
   .in(file("."))
   .settings(
     name := "embedded-files-macro"
